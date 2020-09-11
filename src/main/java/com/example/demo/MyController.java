@@ -41,9 +41,10 @@ public class MyController {
     public String getTen() throws Exception {
         ArrayList<CatFacts> catList = new ArrayList<>();
         Services services = new Services();
-         catList=services.get10service();
+        catList = services.get10service();
+        services.catListToString(catList);
 
-        return catList.toString();
+        return services.catListToString(catList);
     }
 
 }
