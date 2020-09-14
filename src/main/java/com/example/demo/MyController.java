@@ -47,4 +47,15 @@ public class MyController {
         return services.catListToString(catList);
     }
 
+    @GetMapping("/getTenSortByDate")
+    @ResponseBody
+    public String getTenSortByDate() throws Exception {
+        ArrayList<CatFacts> catList = new ArrayList<>();
+        Services services = new Services();
+        catList = services.get10service();
+        services.catListToString(catList);
+
+        return services.catListToString(catList);
+    }
+
 }
