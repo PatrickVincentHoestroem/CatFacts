@@ -73,9 +73,10 @@ public class Services {
 
         }
         if (count == number) {
-            return fact;
+            return fact + "<br>" + "<br>" + "<a href=\"/\">Go Home</a> ";
         } else {
-            return "Sorry, no luck";
+            return "<header> <h1>Sorry, no luck.</h1>  <p> <a href=\"/\">Go Home</a> " +
+                    "or <a href=\"javascript:window.location.href=window.location.href\"> refresh</a> to check against a new cat fact. </p> </header>";
         }
 
     }

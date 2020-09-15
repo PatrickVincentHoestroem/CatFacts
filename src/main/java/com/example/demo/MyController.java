@@ -3,6 +3,7 @@ package com.example.demo;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.BufferedReader;
@@ -21,12 +22,12 @@ public class MyController {
     public String welcome() {
 
         return "Welcome" + "<br>" +
-                "<a href=\"http://localhost:8080/getSingle\">/getSingle</a> - to get a cat joke" + "<br>" +
-                "<a href=\"http://localhost:8080/getTen\">/getTen</a> - to get 10 cat jokes" +"<br>"+
-                "<a href=\"http://localhost:8080/getTenSortByDate\">/getTenSortByDate</a> - to get 10 cat jokes sorted by date of creation" +"<br>"+
-                "<a href=\"http://localhost:8080/contains?inputChar=x&number=1\">/contains?inputChar=x&number=1</a> - to see a fact, if inputChar x, appears 1 time(s) in the fact. " + "<br>" +
-                "in the URL above x can be replaced with any one letter, upper and lower case is interchangeable and with both be counted." +
-                "in the URl 1 can be replaced with any positive whole number";
+                "<a href=\"http://localhost:8080/getSingle\">/getSingle</a> - To get a cat joke." + "<br>" +
+                "<a href=\"http://localhost:8080/getTen\">/getTen</a> - To get ten cat jokes." + "<br>" +
+                "<a href=\"http://localhost:8080/getTenSortByDate\">/getTenSortByDate</a> - To get ten cat jokes sorted by date of creation." + "<br>" +
+                "<a href=\"http://localhost:8080/contains?inputChar=x&number=1\">/contains?inputChar=x&number=1</a> - To see a fact, if inputChar x, appears 1 time(s) in the fact. " + "<br>" +
+                "In the URL above x can be replaced with any one letter, upper and lower case is interchangeable and with both be counted." + "<br>" +
+                "In the URL above 1 can be replaced with any positive whole number.";
     }
 
     @GetMapping("/getSingle")
@@ -36,7 +37,7 @@ public class MyController {
 
         Services services = new Services();
 
-        return services.getSingleService().toString();
+        return services.getSingleService().toString() + "<br>" + "<br>" + "<a href=\"/\">Go Home</a> ";
     }
 
     @GetMapping("/getTen")
@@ -45,7 +46,7 @@ public class MyController {
 
         Services services = new Services();
 
-        return services.catListToString(services.get10Service());
+        return services.catListToString(services.get10Service()) + "<br>" + "<a href=\"/\">Go Home</a> ";
     }
 
     @GetMapping("/getTenSortByDate")
@@ -56,7 +57,7 @@ public class MyController {
         ArrayList<CatFacts> catList = services.get10Service();
         Collections.sort(catList);
 
-        return services.catListSortedToString(catList);
+        return services.catListSortedToString(catList) + "<br>" + "<a href=\"/\">Go Home</a> ";
     }
 
     @GetMapping("/contains")
