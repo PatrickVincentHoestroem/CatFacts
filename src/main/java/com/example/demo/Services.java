@@ -40,6 +40,7 @@ public class Services {
     }
 
 
+
     public String catListSortedToString(ArrayList<CatFacts> catList) {
         String result = "";
 

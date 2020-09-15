@@ -2,7 +2,7 @@ package com.example.demo;
 
 import java.util.Date;
 
-public class CatFacts {
+public class CatFacts implements Comparable<CatFacts> {
     private String text;
     private Date createdAt;
     private Date updatedAt;
@@ -32,6 +32,11 @@ public class CatFacts {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public int compareTo(CatFacts o) {
+        return this.getCreatedAt().compareTo(o.createdAt);
     }
 
     @Override

@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 
 @Controller
 
@@ -54,6 +55,7 @@ public class MyController {
         Services services = new Services();
         catList = services.get10service();
 
+        Collections.sort(catList);
 
         return services.catListSortedToString(catList);
     }
