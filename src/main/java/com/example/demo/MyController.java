@@ -24,8 +24,9 @@ public class MyController {
                 "<a href=\"http://localhost:8080/getSingle\">/getSingle</a> - to get a cat joke" + "<br>" +
                 "<a href=\"http://localhost:8080/getTen\">/getTen</a> - to get 10 cat jokes" +"<br>"+
                 "<a href=\"http://localhost:8080/getTenSortByDate\">/getTenSortByDate</a> - to get 10 cat jokes sorted by date of creation" +"<br>"+
-                "<a href=\"http://localhost:8080/contains?inputChar=x&number=0\">/contains?Char=x&number=0</a> - to see a fact, if inputChar x(can be replaced with any one letter) " +
-                "appears z number of times. (0 can be replaced with any positive whole number)";
+                "<a href=\"http://localhost:8080/contains?inputChar=x&number=1\">/contains?inputChar=x&number=1</a> - to see a fact, if inputChar x, appears 1 time(s) in the fact. " + "<br>" +
+                "in the URL above x can be replaced with any one letter, upper and lower case is interchangeable and with both be counted." +
+                " 0 can be replaced with any positive whole number";
     }
 
     @GetMapping("/getSingle")
