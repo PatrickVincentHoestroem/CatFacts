@@ -1,4 +1,5 @@
 package com.example.demo;
+
 import java.util.Date;
 
 public class CatFacts {
@@ -6,7 +7,8 @@ public class CatFacts {
     private Date createdAt;
     private Date updatedAt;
 
-    public CatFacts(){}
+    public CatFacts() {
+    }
 
     public String getText() {
         return text;
@@ -40,4 +42,5 @@ public class CatFacts {
                 ", updatedAt=" + updatedAt +
                 '}';
     }
+
 }

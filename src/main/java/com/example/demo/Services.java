@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class Services {
 
@@ -30,10 +32,38 @@ public class Services {
         String result = "";
 
         for (int i = 0; i < catList.size(); i++) {
-            result += "joke Nr. " + String.valueOf(i + 1).toString() + " - " + catList.get(i).getText() + " - Created at  "
+            result += "joke Nr. " + (i + 1) + " - " + catList.get(i).getText() + " - Created at  "
                     + catList.get(i).getCreatedAt() + " - Updated at " + catList.get(i).getUpdatedAt() + "<br>";
 
         }
         return result;
     }
+
+
+    public String catListSortedToString(ArrayList<CatFacts> catList) {
+        String result = "";
+
+        for (int i = 0; i < catList.size(); i++) {
+            result += "joke Nr. " + (i + 1) + " - " + catList.get(i).getText() + " - Created at  "
+                    + catList.get(i).getCreatedAt() + "<br>";
+
+        }
+        return result;
+    }
+    public String containsService(char a , int n,String fact ) throws Exception {
+
+        int count = 0;
+        for (int i = 0; i <fact.length() ; i++) {
+            if( fact.toLowerCase().charAt(i)=='a'){
+                count++;
+            }
+        }
+        if(count==n){
+            return  fact;
+        }else{
+            return "Sorry no luck";
+        }
+    }
+
+
 }

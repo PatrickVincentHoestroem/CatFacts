@@ -42,9 +42,33 @@ public class MyController {
         ArrayList<CatFacts> catList = new ArrayList<>();
         Services services = new Services();
         catList = services.get10service();
-        services.catListToString(catList);
+
 
         return services.catListToString(catList);
+    }
+
+    @GetMapping("/getTenSortByDate")
+    @ResponseBody
+    public String getTenSortByDate() throws Exception {
+        ArrayList<CatFacts> catList = new ArrayList<>();
+        Services services = new Services();
+        catList = services.get10service();
+
+
+        return services.catListSortedToString(catList);
+    }
+    @GetMapping("/contains")
+    @ResponseBody
+    public String contains(char a, int n) throws Exception {
+
+        URL catURL = new URL("https://cat-fact.herokuapp.com/facts/random");
+        BufferedReader inputFromCatURL = new BufferedReader(new InputStreamReader(catURL.openStream()));
+        CatFacts catFact = new Gson().fromJson(inputFromCatURL, CatFacts.class);
+        inputFromCatURL.close();
+
+        Services services = new Services();
+        String fact = catFact.getText();
+        return services.containsService(a, n, fact);
     }
 
 }
