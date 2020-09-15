@@ -2,7 +2,6 @@ package com.example.demo;
 
 import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,7 +20,12 @@ public class MyController {
 
     public String welcome() {
 
-        return "Welcome";
+        return "Welcome" + "<br>" +
+                "<a href=\"http://localhost:8080/getSingle\">/getSingle</a> - to get a cat joke" + "<br>" +
+                "<a href=\"http://localhost:8080/getTen\">/getTen</a> - to get 10 cat jokes" +"<br>"+
+                "<a href=\"http://localhost:8080/getTenSortByDate\">/getTenSortByDate</a> - to get 10 cat jokes sorted by date of creation" +"<br>"+
+                "<a href=\"http://localhost:8080/contains?inputChar=x&number=0\">/contains?Char=x&number=0</a> - to see a fact, if inputChar x(can be replaced with any one letter) " +
+                "appears z number of times. (0 can be replaced with any positive whole number)";
     }
 
     @GetMapping("/getSingle")
@@ -29,48 +33,39 @@ public class MyController {
 
     public String getSingle() throws Exception {
 
-        URL catURL = new URL("https://cat-fact.herokuapp.com/facts/random");
-        BufferedReader inputFromCatURL = new BufferedReader(new InputStreamReader(catURL.openStream()));
-        CatFacts catFact = new Gson().fromJson(inputFromCatURL, CatFacts.class);
-        inputFromCatURL.close();
+        Services services = new Services();
 
-        return catFact.toString();
+        return services.getSingleService().toString();
     }
 
     @GetMapping("/getTen")
     @ResponseBody
     public String getTen() throws Exception {
-        ArrayList<CatFacts> catList = new ArrayList<>();
+
         Services services = new Services();
-        catList = services.get10service();
 
-
-        return services.catListToString(catList);
+        return services.catListToString(services.get10Service());
     }
 
     @GetMapping("/getTenSortByDate")
     @ResponseBody
     public String getTenSortByDate() throws Exception {
-        ArrayList<CatFacts> catList = new ArrayList<>();
-        Services services = new Services();
-        catList = services.get10service();
 
+        Services services = new Services();
+        ArrayList<CatFacts> catList = services.get10Service();
         Collections.sort(catList);
 
         return services.catListSortedToString(catList);
     }
+
     @GetMapping("/contains")
     @ResponseBody
-    public String contains(char a, int n) throws Exception {
-
-        URL catURL = new URL("https://cat-fact.herokuapp.com/facts/random");
-        BufferedReader inputFromCatURL = new BufferedReader(new InputStreamReader(catURL.openStream()));
-        CatFacts catFact = new Gson().fromJson(inputFromCatURL, CatFacts.class);
-        inputFromCatURL.close();
-
+    public String contains(char inputChar, int number) throws Exception {
         Services services = new Services();
+        CatFacts catFact = services.getSingleService();
         String fact = catFact.getText();
-        return services.containsService(a, n, fact);
+
+        return services.containsService(inputChar, number, fact);
     }
 
 }

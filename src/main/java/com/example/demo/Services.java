@@ -12,19 +12,23 @@ import java.util.Date;
 
 public class Services {
 
-    public ArrayList<CatFacts> get10service() throws Exception {
+    public CatFacts getSingleService() throws Exception {
 
+        URL catURL = new URL("https://cat-fact.herokuapp.com/facts/random");
+        BufferedReader inputFromCatURL = new BufferedReader(new InputStreamReader(catURL.openStream()));
+        CatFacts catFact = new Gson().fromJson(inputFromCatURL, CatFacts.class);
+        inputFromCatURL.close();
+
+        return catFact;
+    }
+
+    public ArrayList<CatFacts> get10Service() throws Exception {
         ArrayList<CatFacts> catList = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            URL catURL = new URL("https://cat-fact.herokuapp.com/facts/random");
-            BufferedReader inputFromCatURL = new BufferedReader(new InputStreamReader(catURL.openStream()));
-            CatFacts catFact = new Gson().fromJson(inputFromCatURL, CatFacts.class);
-            catList.add(catFact);
-            inputFromCatURL.close();
 
+            catList.add(getSingleService());
         }
-
         return catList;
     }
 
@@ -34,11 +38,9 @@ public class Services {
         for (int i = 0; i < catList.size(); i++) {
             result += "joke Nr. " + (i + 1) + " - " + catList.get(i).getText() + " - Created at  "
                     + catList.get(i).getCreatedAt() + " - Updated at " + catList.get(i).getUpdatedAt() + "<br>";
-
         }
         return result;
     }
-
 
 
     public String catListSortedToString(ArrayList<CatFacts> catList) {
@@ -47,24 +49,34 @@ public class Services {
         for (int i = 0; i < catList.size(); i++) {
             result += "joke Nr. " + (i + 1) + " - " + catList.get(i).getText() + " - Created at  "
                     + catList.get(i).getCreatedAt() + "<br>";
-
         }
         return result;
     }
-    public String containsService(char a , int n,String fact ) throws Exception {
 
+    public String containsService(char inputChar, int number, String fact) throws Exception {
         int count = 0;
-        for (int i = 0; i <fact.length() ; i++) {
-            if( fact.toLowerCase().charAt(i)=='a'){
-                count++;
+
+        if (Character.isLowerCase(inputChar)) {
+            for (int i = 0; i < fact.length(); i++) {
+                if (fact.toLowerCase().charAt(i) == inputChar) {
+                    count++;
+                }
             }
+
         }
-        if(count==n){
-            return  fact;
-        }else{
-            return "Sorry no luck";
+        if (Character.isUpperCase(inputChar)) {
+            for (int i = 0; i < fact.length(); i++) {
+                if (fact.toUpperCase().charAt(i) == inputChar) {
+                    count++;
+                }
+            }
+
         }
+        if (count == number) {
+            return fact;
+        } else {
+            return "Sorry, no luck";
+        }
+
     }
-
-
 }
