@@ -27,7 +27,7 @@ public class MyController {
 
         Services services = new Services();
 
-        return services.getSingleService().toString() + services.getNewline() + services.getNewline() + services.getHomeButton();
+        return services.getSingleService().toString() + services.getNewLine() + services.getNewLine() + services.getHomeButton();
 
     }
 
@@ -37,7 +37,7 @@ public class MyController {
 
         Services services = new Services();
 
-        return services.catListToString(services.getTenService()) + services.getNewline() + services.getHomeButton();
+        return services.catListToString(services.getTenService()) + services.getNewLine() + services.getHomeButton();
     }
 
     @GetMapping("/getTenSortByDate")
@@ -48,7 +48,7 @@ public class MyController {
         ArrayList<CatFacts> catList = services.getTenService();
         Collections.sort(catList);
 
-        return services.catListSortedToString(catList) + services.getNewline() + services.getHomeButton();
+        return services.catListSortedToString(catList) + services.getNewLine() + services.getHomeButton();
     }
 
     @GetMapping("/contains")

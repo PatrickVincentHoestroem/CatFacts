@@ -6,22 +6,24 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 
 public class Services {
-    private String newline = "<br>";
+    private String newLine = "<br>";
     private String homeButton = "<a href=\"/\">Go Home</a>";
+    private String GetSingleButton = "<a href=\"http://localhost:8080/getSingle\">/getSingle</a>";
+    private String getTenButton = "<a href=\"http://localhost:8080/getTen\">/getTen</a>";
+    private String getTenSortByDateButton = "<a href=\"http://localhost:8080/getTenSortByDate\">/getTenSortByDate</a>";
+    private String containsButton = "<a href=\"http://localhost:8080/contains?inputChar=x&number=1\">/contains?inputChar=x&number=1</a>";
+    private String refreshButton = " <a href=\"javascript:window.location.href=window.location.href\"> refresh</a>";
 
     public String getWelcomeService() {
 
-        return "Welcome" + "<br>" +
-                "<a href=\"http://localhost:8080/getSingle\">/getSingle</a> - To get a cat joke." + "<br>" +
-                "<a href=\"http://localhost:8080/getTen\">/getTen</a> - To get ten cat jokes." + "<br>" +
-                "<a href=\"http://localhost:8080/getTenSortByDate\">/getTenSortByDate</a> - To get ten cat jokes sorted by date of creation." + "<br>" +
-                "<a href=\"http://localhost:8080/contains?inputChar=x&number=1\">/contains?inputChar=x&number=1</a> - To see a fact, if inputChar x, appears 1 time(s) in the fact. " + "<br>" +
-                "In the URL above x can be replaced with any one letter, upper and lower case is interchangeable and with both be counted." + "<br>" +
+        return "Welcome" + newLine +
+                GetSingleButton + " - To get a cat joke." + newLine +
+                getTenButton + " - To get ten cat jokes." + newLine +
+                getTenSortByDateButton + " - To get ten cat jokes sorted by date of creation." + newLine +
+                containsButton + " - To see a fact, if inputChar x, appears 1 time(s) in the fact. " + newLine +
+                "In the URL above x can be replaced with any one letter, upper and lower case is interchangeable and with both be counted." + newLine +
                 "In the URL above 1 can be replaced with any positive whole number.";
     }
 
@@ -50,7 +52,7 @@ public class Services {
 
         for (int i = 0; i < catList.size(); i++) {
             result += "joke Nr. " + (i + 1) + " - " + catList.get(i).getText() + " - Created at  "
-                    + catList.get(i).getCreatedAt() + " - Updated at " + catList.get(i).getUpdatedAt() + "<br>";
+                    + catList.get(i).getCreatedAt() + " - Updated at " + catList.get(i).getUpdatedAt() + newLine;
         }
         return result;
     }
@@ -61,7 +63,7 @@ public class Services {
 
         for (int i = 0; i < catList.size(); i++) {
             result += "joke Nr. " + (i + 1) + " - " + catList.get(i).getText() + " - Created at  "
-                    + catList.get(i).getCreatedAt() + "<br>";
+                    + catList.get(i).getCreatedAt() + newLine;
         }
         return result;
     }
@@ -86,16 +88,16 @@ public class Services {
 
         }
         if (count == number) {
-            return fact + newline + newline + homeButton;
+            return fact + newLine + newLine + homeButton + " - " + refreshButton + " to check against a new cat fact.";
         } else {
-            return "<header> <h1>Sorry, no luck.</h1>  <p> <a href=\"/\">Go Home</a> " +
-                    "or <a href=\"javascript:window.location.href=window.location.href\"> refresh</a> to check against a new cat fact. </p> </header>";
+            return "<header> <h1>Sorry, no luck.</h1>  <p> " + homeButton +
+                    " or " + refreshButton + " to check against a new cat fact. </p> </header>";
         }
 
     }
 
-    public String getNewline() {
-        return newline;
+    public String getNewLine() {
+        return newLine;
     }
 
     public String getHomeButton() {
