@@ -1,14 +1,9 @@
 package com.example.demo;
 
-import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -21,7 +16,8 @@ public class MyController {
 
     public String welcome() {
 
-        return "Welcome";
+        Services services = new Services();
+        return services.getWelcomeService();
     }
 
     @GetMapping("/getSingle")
@@ -29,23 +25,40 @@ public class MyController {
 
     public String getSingle() throws Exception {
 
-        URL catURL = new URL("https://cat-fact.herokuapp.com/facts/random");
-        BufferedReader inputFromCatURL = new BufferedReader(new InputStreamReader(catURL.openStream()));
-        CatFacts catFact = new Gson().fromJson(inputFromCatURL, CatFacts.class);
-        inputFromCatURL.close();
+        Services services = new Services();
 
-        return catFact.toString();
+        return services.getSingleService().toString() + services.getNewLine() + services.getNewLine() + services.getHomeButton();
+
     }
 
     @GetMapping("/getTen")
     @ResponseBody
     public String getTen() throws Exception {
-        ArrayList<CatFacts> catList = new ArrayList<>();
-        Services services = new Services();
-        catList = services.get10service();
-        services.catListToString(catList);
 
-        return services.catListToString(catList);
+        Services services = new Services();
+
+        return services.catListToString(services.getTenService()) + services.getNewLine() + services.getHomeButton();
+    }
+
+    @GetMapping("/getTenSortByDate")
+    @ResponseBody
+    public String getTenSortByDate() throws Exception {
+
+        Services services = new Services();
+        ArrayList<CatFacts> catList = services.getTenService();
+        Collections.sort(catList);
+
+        return services.catListSortedToString(catList) + services.getNewLine() + services.getHomeButton();
+    }
+
+    @GetMapping("/contains")
+    @ResponseBody
+    public String contains(char inputChar, int number) throws Exception {
+        Services services = new Services();
+        CatFacts catFact = services.getSingleService();
+        String fact = catFact.getText();
+
+        return services.containsService(inputChar, number, fact);
     }
 
     @GetMapping("/getTenSortByDate")

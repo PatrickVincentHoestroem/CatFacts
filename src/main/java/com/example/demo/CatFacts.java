@@ -1,12 +1,14 @@
 package com.example.demo;
+
 import java.util.Date;
 
-public class CatFacts {
+public class CatFacts implements Comparable<CatFacts> {
     private String text;
     private Date createdAt;
     private Date updatedAt;
 
-    public CatFacts(){}
+    public CatFacts() {
+    }
 
     public String getText() {
         return text;
@@ -33,6 +35,11 @@ public class CatFacts {
     }
 
     @Override
+    public int compareTo(CatFacts o) {
+        return this.getCreatedAt().compareTo(o.createdAt);
+    }
+
+    @Override
     public String toString() {
         return "CatJoke{" +
                 "text='" + text + '\'' +
@@ -40,4 +47,5 @@ public class CatFacts {
                 ", updatedAt=" + updatedAt +
                 '}';
     }
+
 }
